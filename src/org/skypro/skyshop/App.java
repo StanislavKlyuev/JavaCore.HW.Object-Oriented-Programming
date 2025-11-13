@@ -9,10 +9,10 @@ public class App {
 
         System.out.println("Покупатель добавляет продукты в корзину");
         basket.addProduct("Apple", 50);
-        basket.addProduct("Watermellon", 90);
+        basket.addProduct("Watermellon", 90, 20);
         basket.addProduct("Lemon", 30);
-        basket.addProduct("Potato", 25);
-        basket.addProduct("Bread", 45);
+        basket.addProduct("Potato", 25, 10);
+        basket.addProduct("Bread");
         /*
         Есть два варианта пополнения корзины:
           1. Сначала создать продукт, затем добавить его в корзину (2 строчки кода)
@@ -24,7 +24,7 @@ public class App {
         basket.addProduct("Whiskey", 1000);
 
         System.out.println("\nПечать содержимого корзины с несколькими товарами");
-        basket.totalProduct();
+        basket.printTotalProduct();
 
         System.out.println("\nПолучение стоимости корзины с несколькими товарами");
         System.out.println(basket.getTotalPrice());
@@ -39,14 +39,12 @@ public class App {
         basket.clear();
 
         System.out.println("\nПечать содержимого пустой корзины");
-        basket.totalProduct();
+        basket.printTotalProduct();
 
         System.out.println("\nПолучение стоимости пустой корзины");
         System.out.println(basket.getTotalPrice());
 
         System.out.println("\nПоиск товара по имени в пустой корзине");
         System.out.println(basket.findProduct("Whiskey"));
-
-
     }
 }
