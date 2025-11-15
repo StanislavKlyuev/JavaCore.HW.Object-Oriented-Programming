@@ -1,8 +1,6 @@
 package org.skypro.skyshop.basket;
 
-import org.skypro.skyshop.product.DiscountedProduct;
-import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.product.*;
 
 public class ProductBasket {
 
@@ -13,45 +11,18 @@ public class ProductBasket {
         this.productBasket = new Product[5];
     }
 
-    public void addProduct(String name, int price) {        //Метод для конструктора SimpleProduct
+    public void addProduct(Product product) {
         for (int i = 0; i < 6; i++) {
             if (i == 5) {
-                System.out.println("Невозможно добавить продукт");
+                System.out.println("Невозможно добавить продукт " + product.getName() + ". Корзина заполнена.");
                 break;
             }
-            if (productBasket[i] != null)
-                continue;
-            productBasket[i] = new SimpleProduct(name, price);
-            total += price;
-            break;
-        }
-    }
-
-    public void addProduct(String name, int price, int discountPercent) {        //Метод для конструктора DiscountedProduct
-        for (int i = 0; i < 6; i++) {
-            if (i == 5) {
-                System.out.println("Невозможно добавить продукт");
+            if (productBasket[i] == null) {
+                productBasket[i] = product;
+                total += product.getPrice();
+                System.out.println("Добавлен продукт " + product.getName());
                 break;
             }
-            if (productBasket[i] != null)
-                continue;
-            productBasket[i] = new DiscountedProduct(name, price, discountPercent);
-            total += productBasket[i].getPrice();
-            break;
-        }
-    }
-
-    public void addProduct(String name) {                //Метод для конструктора FixPriceProduct
-        for (int i = 0; i < 6; i++) {
-            if (i == 5) {
-                System.out.println("Невозможно добавить продукт");
-                break;
-            }
-            if (productBasket[i] != null)
-                continue;
-            productBasket[i] = new org.skypro.skyshop.product.FixPriceProduct(name);
-            total += productBasket[i].getPrice();
-            break;
         }
     }
 
@@ -59,9 +30,9 @@ public class ProductBasket {
         return "Общая стоимость корзины: " + total;
     }
 
-    public String getSpecialProductSum(){
+    public String getSpecialProductSum() {
         int sum = 0;
-        for(Product product: productBasket) {
+        for (Product product : productBasket) {
             if (product.isSpecial())
                 sum++;
         }
@@ -87,10 +58,13 @@ public class ProductBasket {
     public boolean findProduct(String name) {
         boolean have = false;
         for (Product product : productBasket) {
-            if (product == null)
+            if (product == null) {
                 continue;
-            if (name.equalsIgnoreCase(product.getName()))
+            }
+            if (name.equalsIgnoreCase(product.getName())) {
                 have = true;
+                break;
+            }
         }
         return have;
     }

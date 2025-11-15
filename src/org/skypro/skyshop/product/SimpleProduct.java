@@ -6,10 +6,11 @@ public class SimpleProduct extends Product {
 
     public SimpleProduct(String name, int price) {
         super(name);
-        if (price <= 0)
+        if (price <= 0) {
             throw new IllegalArgumentException("Цена товара не соответствует");
+        }
         this.price = price;;
-        System.out.println("Продукт добавлен");
+        System.out.println("Создан продукт " + name);
     }
 
     @Override

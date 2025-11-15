@@ -9,7 +9,7 @@ public class DiscountedProduct extends Product{
         super(name);
         this.basePrice = basePrice;
         this.discountPercent = discountPercent;
-        System.out.println("Продукт со скидкой добавлен");
+        System.out.println("Создан продукт со скидкой " + name);
     }
 
     @Override

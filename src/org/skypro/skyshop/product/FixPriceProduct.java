@@ -1,15 +1,15 @@
 package org.skypro.skyshop.product;
 
-public class FixPriceProduct extends Product{
+public class FixPriceProduct extends Product {
 
-   private static final int FIX_PRICE = 55;
+    private static final int FIX_PRICE = 55;
 
     public FixPriceProduct(String name) {
         super(name);
-        System.out.println("Продукт с фиксированной ценой добавлен");
+        System.out.println("Создан продукт с фиксированной ценой " + name);
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return FIX_PRICE;
     }
 

@@ -1,27 +1,30 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.product.*;
 
 public class App {
     public static void main(String[] args) {
 
         ProductBasket basket = new ProductBasket();
 
-        System.out.println("Покупатель добавляет продукты в корзину");
-        basket.addProduct("Apple", 50);
-        basket.addProduct("Watermellon", 90, 20);
-        basket.addProduct("Lemon", 30);
-        basket.addProduct("Potato", 25, 10);
-        basket.addProduct("Bread");
-        /*
-        Есть два варианта пополнения корзины:
-          1. Сначала создать продукт, затем добавить его в корзину (2 строчки кода)
-          2. Определять продукт при добавлении в корзину (1 строчка кода).
-        Здесь представлен второй вариант
-        */
+        System.out.println("\nСоздаем продукты");
+        SimpleProduct apple = new SimpleProduct("Apple", 50);
+        SimpleProduct lemon = new SimpleProduct("Lemon", 30);
+        DiscountedProduct watermellon = new DiscountedProduct("Watermellon", 90, 20);
+        DiscountedProduct potato = new DiscountedProduct("Potato", 25, 10);
+        FixPriceProduct bread = new FixPriceProduct("Bread");
+
+        System.out.println("\nПокупатель добавляет продукты в корзину");
+        basket.addProduct(apple);
+        basket.addProduct(lemon);
+        basket.addProduct(watermellon);
+        basket.addProduct(potato);
+        basket.addProduct(bread);
 
         System.out.println("\nДобавление продукта в заполненную корзину, в которой нет свободного места");
-        basket.addProduct("Whiskey", 1000);
+        SimpleProduct whiskey = new SimpleProduct("Whiskey", 1000);
+        basket.addProduct(whiskey);
 
         System.out.println("\nПечать содержимого корзины с несколькими товарами");
         basket.printTotalProduct();
