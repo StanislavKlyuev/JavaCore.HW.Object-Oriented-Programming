@@ -4,7 +4,6 @@ import org.skypro.skyshop.product.*;
 
 public class ProductBasket {
 
-    private int total = 0;
     private Product[] productBasket;
 
     public ProductBasket() {
@@ -19,49 +18,51 @@ public class ProductBasket {
             }
             if (productBasket[i] == null) {
                 productBasket[i] = product;
-                total += product.getPrice();
                 System.out.println("Добавлен продукт " + product.getName());
                 break;
             }
         }
     }
 
-    public String getTotalPrice() {
-        return "Общая стоимость корзины: " + total;
+    public int getTotalPrice() {
+        int total = 0;
+        for (Product product : productBasket) {
+            if (product != null) {
+                total += product.getPrice();
+            }
+        }
+        return total;
     }
 
-    public String getSpecialProductSum() {
+    public int getSpecialProductSum() {
         int sum = 0;
         for (Product product : productBasket) {
-            if (product.isSpecial())
+            if (product != null && product.isSpecial())
                 sum++;
         }
-        return "Специальных товаров: " + sum;
+        return sum;
     }
 
     public void printTotalProduct() {
         boolean isEmpty = true;
         for (Product product : productBasket) {
-            if (product == null)
-                continue;
-            System.out.println(product);
-            isEmpty = false;
+            if (product != null) {
+                System.out.println(product);
+                isEmpty = false;
+            }
         }
         if (isEmpty) {
             System.out.println("в корзине пусто");
         } else {
-            System.out.println(getTotalPrice());
-            System.out.println(getSpecialProductSum());
+            System.out.println("Общая стоимость корзины: " + getTotalPrice());
+            System.out.println("Специальных товаров: " + getSpecialProductSum());
         }
     }
 
     public boolean findProduct(String name) {
         boolean have = false;
         for (Product product : productBasket) {
-            if (product == null) {
-                continue;
-            }
-            if (name.equalsIgnoreCase(product.getName())) {
+            if (product != null && name.equalsIgnoreCase(product.getName())) {
                 have = true;
                 break;
             }
@@ -73,6 +74,5 @@ public class ProductBasket {
         for (int i = 0; i < productBasket.length; i++) {
             productBasket[i] = null;
         }
-        total = 0;
     }
 }
