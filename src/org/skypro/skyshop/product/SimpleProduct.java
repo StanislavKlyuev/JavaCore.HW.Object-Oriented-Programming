@@ -9,7 +9,8 @@ public class SimpleProduct extends Product {
         if (price <= 0) {
             throw new IllegalArgumentException("Цена товара не соответствует");
         }
-        this.price = price;;
+        this.price = price;
+        ;
         System.out.println("Создан продукт " + name);
     }
 
