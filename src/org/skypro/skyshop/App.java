@@ -1,9 +1,11 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.exceptions.BestResultNotFound;
 import org.skypro.skyshop.finder.SearchEngine;
 import org.skypro.skyshop.product.*;
 import org.skypro.skyshop.services.Article;
+
 import java.util.Arrays;
 
 public class App {
@@ -60,11 +62,11 @@ public class App {
         System.out.println("\nЗадача 3");
 
         System.out.println("\nСоздаем описание товаров");
-        Article appleInfo = new Article("Apple", "fruit and green");
-        Article lemonInfo = new Article("Lemon", "fruit and yellow");
-        Article watermellonInfo = new Article("Watermellon", "fruit and green");
-        Article cornInfo = new Article("Corn", "vegetable and yellow");
-        Article tomatoInfo = new Article("Tomato", "vegetable and red");
+        Article appleInfo = new Article("Apple", "Фрукт. Цвет - красный, жёлтый, зеленый. Круглый, сочный, сладкий. Растет в саду. На ощуп твердый, гладкий. Едят сырым, варят варенье, готовят сок.");
+        Article lemonInfo = new Article("Lemon", "Фрукт из рода цитрусовых. Фрукт овальный, жёлтый, имеет приятный запах и кислый. Сверху покрыт кожурой, внутри есть дольки и семена");
+        Article watermellonInfo = new Article("Watermellon", "Крупная ягода. Чаще всего круглый или овальный. Окрас белый, жёлтый, тёмно-зелёный. Едят сырым, делают сок, варят варенье.");
+        Article cornInfo = new Article("Corn", "Травянистое растение. Злак. Плод — початок, спрятанный под зелёными листьями-обёртками. На початке рядами растут жёлтые, белые или даже разноцветные зёрна.");
+        Article tomatoInfo = new Article("Tomato", "Овощ. Красный и круглый. На вкус кисло-сладкий. Растёт в огороде на грядке. На ощупь мягкий, гладкий. Можно приготовить салат, суп, сок, кетчуп.");
 
         System.out.println("\nСоздаем компонент поиска товаров и добавляем в него объекты Article и Product");
         SearchEngine find = new SearchEngine(10);
@@ -83,9 +85,44 @@ public class App {
         System.out.println(Arrays.toString(find.search("Apple")));
 
         System.out.println("\nПроизводим поиск по описанию");
-        System.out.println(Arrays.toString(find.search("yellow")));
+        System.out.println(Arrays.toString(find.search("фрукт")));
 
         System.out.println("\nПроизводим поиск по типу");
         System.out.println(Arrays.toString(find.search("DiscountedProduct")));
+
+        System.out.println("______________________________________________________________________");
+
+        System.out.println("\nЗадача 4");
+
+        System.out.println("\nСоздаем продукты с ошибками");
+        try {
+            SimpleProduct lime = new SimpleProduct("Lime", -30);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        try {
+            DiscountedProduct greupfruit = new DiscountedProduct("Greupfruit", 40, 120);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        try {
+            FixPriceProduct strawberry = new FixPriceProduct("     ");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+
+        System.out.println("\nИщем максимальное количество повторений");
+        try {
+            System.out.println(find.searchMostAppropriateElement("фрукт"));
+        } catch (BestResultNotFound e) {
+            System.out.println(e);
+        }
+
+        System.out.println("\nИщем по отсутствующему слову");
+        try {
+            System.out.println(find.searchMostAppropriateElement("корабль"));
+        } catch (BestResultNotFound e) {
+            System.out.println(e);
+        }
     }
 }
