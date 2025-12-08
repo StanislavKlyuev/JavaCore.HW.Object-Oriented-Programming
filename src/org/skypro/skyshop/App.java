@@ -6,8 +6,6 @@ import org.skypro.skyshop.finder.SearchEngine;
 import org.skypro.skyshop.product.*;
 import org.skypro.skyshop.services.Article;
 
-import java.util.Arrays;
-
 public class App {
     public static void main(String[] args) {
 
@@ -29,7 +27,7 @@ public class App {
         basket.addProduct(corn);
         basket.addProduct(tomato);
 
-        System.out.println("\nДобавление продукта в заполненную корзину, в которой нет свободного места");
+        System.out.println("\nДобавление продукта в заполненную корзину, в которой нет свободного места (было актуально, когда корзина была массивом - до задачи 5)");
         SimpleProduct whiskey = new SimpleProduct("Whiskey", 1000);
         basket.addProduct(whiskey);
 
@@ -69,7 +67,7 @@ public class App {
         Article tomatoInfo = new Article("Tomato", "Овощ. Красный и круглый. На вкус кисло-сладкий. Растёт в огороде на грядке. На ощупь мягкий, гладкий. Можно приготовить салат, суп, сок, кетчуп.");
 
         System.out.println("\nСоздаем компонент поиска товаров и добавляем в него объекты Article и Product");
-        SearchEngine find = new SearchEngine(10);
+        SearchEngine find = new SearchEngine();   // до задачи №5 здесь передавался аргумент - размер корзины (количество элементов массива)
         find.add(apple);
         find.add(lemon);
         find.add(watermellon);
@@ -82,13 +80,13 @@ public class App {
         find.add(tomatoInfo);
 
         System.out.println("\nПроизводим поиск по названию");
-        System.out.println(Arrays.toString(find.search("Apple")));
+        System.out.println(find.search("Apple"));
 
         System.out.println("\nПроизводим поиск по описанию");
-        System.out.println(Arrays.toString(find.search("фрукт")));
+        System.out.println(find.search("фрукт"));
 
         System.out.println("\nПроизводим поиск по типу");
-        System.out.println(Arrays.toString(find.search("DiscountedProduct")));
+        System.out.println(find.search("DiscountedProduct"));
 
         System.out.println("______________________________________________________________________");
 
@@ -124,5 +122,31 @@ public class App {
         } catch (BestResultNotFound e) {
             System.out.println(e);
         }
+
+        System.out.println("______________________________________________________________________");
+
+        System.out.println("\nЗадача 5");
+
+        System.out.println("\nДля проверки добавим наши продукты в корзину");
+        basket.addProduct(apple);
+        basket.addProduct(lemon);
+        basket.addProduct(watermellon);
+        basket.addProduct(corn);
+        basket.addProduct(tomato);
+        basket.addProduct(whiskey);
+
+        basket.printTotalProduct();
+
+        System.out.println("\nУдаляем продукт из корзины по имени и выводим его на экран");
+        System.out.println(basket.removeForName("lemon"));
+
+        System.out.println("\nПроверяем продукты в корзине после удаления");
+        basket.printTotalProduct();
+
+        System.out.println("\nПытаемся удалить продукт, которого нет в корзине");
+        System.out.println(basket.removeForName("potato"));
+
+        System.out.println("\nПроверяем продукты в корзине после удаления несуществующего продукта");
+        basket.printTotalProduct();
     }
 }
