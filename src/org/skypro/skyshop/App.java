@@ -9,22 +9,31 @@ import org.skypro.skyshop.services.Article;
 public class App {
     public static void main(String[] args) {
 
-        System.out.println("\nЗадачи 1 и 2");
+        System.out.println("\nЗадачи 1 и 2. Создаем Интернет-Магазин на основе ARRAYS.");
 
         ProductBasket basket = new ProductBasket();
 
         System.out.println("\nСоздаем продукты");
-        SimpleProduct apple = new SimpleProduct("Apple", 50);
         SimpleProduct lemon = new SimpleProduct("Lemon", 30);
-        DiscountedProduct watermellon = new DiscountedProduct("Watermellon", 90, 20);
+        SimpleProduct apple = new SimpleProduct("Apple", 50);
+        SimpleProduct watermellon = new SimpleProduct("Watermellon", 95);
+        DiscountedProduct appleDis = new DiscountedProduct("Apple", 50, 10);
+        DiscountedProduct lemonDis = new DiscountedProduct("Lemon", 30, 30);
+        DiscountedProduct watermellonDis = new DiscountedProduct("Watermellon", 90, 20);
         DiscountedProduct corn = new DiscountedProduct("Corn", 25, 10);
+        FixPriceProduct appleFix = new FixPriceProduct("Apple");
         FixPriceProduct tomato = new FixPriceProduct("Tomato");
 
-        System.out.println("\nПокупатель добавляет продукты в корзину");
-        basket.addProduct(apple);
+        System.out.println("\nПокупатель добавляет продукты в корзину (в хаотичном порядке)");
         basket.addProduct(lemon);
+        basket.addProduct(apple);
         basket.addProduct(watermellon);
+        basket.addProduct(appleDis);
+        basket.addProduct(lemonDis);
+        basket.addProduct(watermellonDis);
         basket.addProduct(corn);
+        basket.addProduct(tomato);
+        basket.addProduct(appleFix);
         basket.addProduct(tomato);
 
         System.out.println("\nДобавление продукта в заполненную корзину, в которой нет свободного места (было актуально, когда корзина была массивом - до задачи 5)");
@@ -57,7 +66,7 @@ public class App {
 
         System.out.println("______________________________________________________________________");
 
-        System.out.println("\nЗадача 3");
+        System.out.println("\nЗадача 3. СОздаем описание товаров и поисковик.");
 
         System.out.println("\nСоздаем описание товаров");
         Article appleInfo = new Article("Apple", "Фрукт. Цвет - красный, жёлтый, зеленый. Круглый, сочный, сладкий. Растет в саду. На ощуп твердый, гладкий. Едят сырым, варят варенье, готовят сок.");
@@ -66,18 +75,23 @@ public class App {
         Article cornInfo = new Article("Corn", "Травянистое растение. Злак. Плод — початок, спрятанный под зелёными листьями-обёртками. На початке рядами растут жёлтые, белые или даже разноцветные зёрна.");
         Article tomatoInfo = new Article("Tomato", "Овощ. Красный и круглый. На вкус кисло-сладкий. Растёт в огороде на грядке. На ощупь мягкий, гладкий. Можно приготовить салат, суп, сок, кетчуп.");
 
-        System.out.println("\nСоздаем компонент поиска товаров и добавляем в него объекты Article и Product");
+        System.out.println("\nСоздаем компонент поиска товаров и добавляем в него объекты Article и Product в хаотичном порядке");
         SearchEngine find = new SearchEngine();   // до задачи №5 здесь передавался аргумент - размер корзины (количество элементов массива)
-        find.add(apple);
-        find.add(lemon);
+        find.add(lemonInfo);
         find.add(watermellon);
         find.add(corn);
-        find.add(tomato);
-        find.add(appleInfo);
-        find.add(lemonInfo);
         find.add(watermellonInfo);
         find.add(cornInfo);
+        find.add(lemon);
         find.add(tomatoInfo);
+        find.add(apple);
+        find.add(lemonDis);
+        find.add(watermellonDis);
+        find.add(appleDis);
+        find.add(appleFix);
+        find.add(tomato);
+        find.add(tomato);
+        find.add(appleInfo);
 
         System.out.println("\nПроизводим поиск по названию");
         System.out.println(find.search("Apple"));
@@ -86,11 +100,11 @@ public class App {
         System.out.println(find.search("фрукт"));
 
         System.out.println("\nПроизводим поиск по типу");
-        System.out.println(find.search("DiscountedProduct"));
+        System.out.println(find.search("SimpleProduct"));
 
         System.out.println("______________________________________________________________________");
 
-        System.out.println("\nЗадача 4");
+        System.out.println("\nЗадача 4. Перехват ошибок (ИСКЛЮЧЕНИЯ)");
 
         System.out.println("\nСоздаем продукты с ошибками");
         try {
@@ -125,17 +139,20 @@ public class App {
 
         System.out.println("______________________________________________________________________");
 
-        System.out.println("\nЗадача 5");
+        System.out.println("\nЗадача 5. Изменяем струтуру магазина с ARRAYS на LIST");
 
         System.out.println("\nДля проверки добавим наши продукты в корзину");
         basket.addProduct(apple);
+        basket.addProduct(appleDis);
+        basket.addProduct(appleFix);
         basket.addProduct(lemon);
+        basket.addProduct(lemonDis);
         basket.addProduct(watermellon);
+        basket.addProduct(watermellonDis);
         basket.addProduct(corn);
         basket.addProduct(tomato);
+        basket.addProduct(tomato);
         basket.addProduct(whiskey);
-
-        basket.printTotalProduct();
 
         System.out.println("\nУдаляем продукт из корзины по имени и выводим его на экран");
         System.out.println(basket.removeForName("lemon"));
@@ -148,5 +165,13 @@ public class App {
 
         System.out.println("\nПроверяем продукты в корзине после удаления несуществующего продукта");
         basket.printTotalProduct();
+
+        System.out.println("______________________________________________________________________");
+
+        System.out.println("\nЗадача 6. Изменяем струтуру магазина с LIST на MAP");
+
+        System.out.println("______________________________________________________________________");
+
+
     }
 }
