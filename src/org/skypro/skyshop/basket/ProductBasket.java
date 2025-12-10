@@ -82,16 +82,21 @@ public class ProductBasket {
         productBasket.clear();
     }
 
-    public List<Product> removeForName(String name) {
-        List<Product> temp = new ArrayList<>();
-        for (String string : productBasket.keySet()) {
-            if (name.equalsIgnoreCase(string)) {
-                temp = productBasket.remove(string);
-                return temp;
-            }
-        }
-        return temp;
+    public List<Product> removeForName(String name) {   //Метод, предложенный наставником. Не сработает, если расхождения в регистре.
+        return productBasket.remove(name);
     }
+
+
+//    public List<Product> removeForName(String name) {
+//        List<Product> temp = new ArrayList<>();
+//        for (String string : productBasket.keySet()) {
+//            if (name.equalsIgnoreCase(string)) {
+//                temp = productBasket.remove(string);
+//                return temp;
+//            }
+//        }
+//        return temp;
+//    }
 
     @Override
     public String toString() {

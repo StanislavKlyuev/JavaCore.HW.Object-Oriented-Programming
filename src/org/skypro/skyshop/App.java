@@ -66,7 +66,7 @@ public class App {
 
         System.out.println("______________________________________________________________________");
 
-        System.out.println("\nЗадача 3. СОздаем описание товаров и поисковик.");
+        System.out.println("\nЗадача 3. СОздаем описание товаров и поисковик. Интерфейсы.");
 
         System.out.println("\nСоздаем описание товаров");
         Article appleInfo = new Article("Apple", "Фрукт. Цвет - красный, жёлтый, зеленый. Круглый, сочный, сладкий. Растет в саду. На ощуп твердый, гладкий. Едят сырым, варят варенье, готовят сок.");
@@ -104,7 +104,7 @@ public class App {
 
         System.out.println("______________________________________________________________________");
 
-        System.out.println("\nЗадача 4. Перехват ошибок (ИСКЛЮЧЕНИЯ)");
+        System.out.println("\nЗадача 4. Перехват ошибок. ИСКЛЮЧЕНИЯ.");
 
         System.out.println("\nСоздаем продукты с ошибками");
         try {
@@ -154,8 +154,14 @@ public class App {
         basket.addProduct(tomato);
         basket.addProduct(whiskey);
 
-        System.out.println("\nУдаляем продукт из корзины по имени и выводим его на экран");
+        System.out.println("\nУдаляем продукт из корзины по имени и выводим его на экран. Предложен НАСТАВНИКОМ. Отличие имени и аргумента - регистр первой буквы (lemon vs Lemon)");   // не сработает, так как "lemon" != "Lemon"
         System.out.println(basket.removeForName("lemon"));
+
+        System.out.println("\nТо же самое, но имя и аргумент написаны Одинаково. (Lemon)");   // не сработает, так как "lemon" != "Lemon"
+        System.out.println(basket.removeForName("Lemon"));
+
+
+
 
         System.out.println("\nПроверяем продукты в корзине после удаления");
         basket.printTotalProduct();
