@@ -48,4 +48,9 @@ public abstract class Product implements Searchable {
     public int hashCode() {
         return Objects.hashCode(name);
     }
+
+    @Override
+    public int compareTo(Searchable o) {
+        return name.compareTo(o.getSearchName());
+    }
 }
