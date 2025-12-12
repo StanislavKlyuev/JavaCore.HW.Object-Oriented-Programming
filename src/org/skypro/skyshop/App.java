@@ -154,14 +154,8 @@ public class App {
         basket.addProduct(tomato);
         basket.addProduct(whiskey);
 
-        System.out.println("\nУдаляем продукт из корзины по имени и выводим его на экран. Предложен НАСТАВНИКОМ. Отличие имени и аргумента - регистр первой буквы (lemon vs Lemon)");   // не сработает, так как "lemon" != "Lemon"
+        System.out.println("\nУдаляем продукт из корзины по имени и выводим его на экран");
         System.out.println(basket.removeForName("lemon"));
-
-        System.out.println("\nТо же самое, но имя и аргумент написаны Одинаково. (Lemon)");   // не сработает, так как "lemon" != "Lemon"
-        System.out.println(basket.removeForName("Lemon"));
-
-
-
 
         System.out.println("\nПроверяем продукты в корзине после удаления");
         basket.printTotalProduct();
