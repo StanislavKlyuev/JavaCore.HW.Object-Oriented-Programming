@@ -42,4 +42,9 @@ public final class Article implements Searchable {
     public int hashCode() {
         return Objects.hashCode(ARTICLE);
     }
+
+    @Override
+    public int compareTo(Searchable o) {
+        return getSearchName().compareTo(o.getSearchName());
+    }
 }

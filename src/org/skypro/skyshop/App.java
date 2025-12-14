@@ -78,11 +78,11 @@ public class App {
         System.out.println("\nСоздаем компонент поиска товаров и добавляем в него объекты Article и Product в хаотичном порядке");
         SearchEngine find = new SearchEngine();   // до задачи №5 здесь передавался аргумент - размер корзины (количество элементов массива)
         find.add(lemonInfo);
+        find.add(lemon);
         find.add(watermellon);
         find.add(corn);
         find.add(watermellonInfo);
         find.add(cornInfo);
-        find.add(lemon);
         find.add(tomatoInfo);
         find.add(apple);
         find.add(lemonDis);
@@ -171,6 +171,14 @@ public class App {
         System.out.println("\nЗадача 6. Изменяем струтуру магазина с LIST на MAP");
 
         System.out.println("______________________________________________________________________");
+
+        System.out.println("\nЗадача 7. Изменяем поисковик с Мар на Set. Сортировка (Comarable / Comparator)");
+
+        System.out.println("find = " + find);
+
+        System.out.println("______________________________________________________________________");
+
+
 
     }
 }

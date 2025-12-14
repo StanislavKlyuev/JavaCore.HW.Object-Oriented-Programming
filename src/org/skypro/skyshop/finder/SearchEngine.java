@@ -7,26 +7,35 @@ import java.util.*;
 
 public class SearchEngine {
 
-    private Map<String, Searchable> searchables;
+    private Set<Searchable> searchables;
 
     public SearchEngine() {
-        this.searchables = new TreeMap<>();
+        this.searchables = new TreeSet<>(new Comparator<Searchable>() {
+            @Override
+            public int compare(Searchable o1, Searchable o2) {
+                if (o1.getSearchName().length() - o2.getSearchName().length() != 0) {
+                    return o1.getSearchName().length() - o2.getSearchName().length();
+                } else {
+                    return o1.compareTo(o2);
+                }
+            }
+        });
     }
 
     public void add(Searchable searchable) {
         if (searchable != null) {
-            searchables.computeIfAbsent(searchable.getSearchName(), key -> searchable);
+            searchables.add(searchable);
         }
     }
 
     public List<Searchable> search(String string) {
         List<Searchable> find = new ArrayList<>();
         string = string.toLowerCase();
-        for (String str : searchables.keySet()) {
-            String str1 = searchables.get(str).getStringRepresentation().toLowerCase();
-            String str2 = searchables.get(str).getContentType().toLowerCase();
+        for (Searchable searchable : searchables) {
+            String str1 = searchable.getStringRepresentation().toLowerCase();
+            String str2 = searchable.getContentType().toLowerCase();
             if (str1.contains(string) || str2.contains(string)) {
-                find.add(searchables.get(str));
+                find.add(searchable);
             }
         }
         return find;
@@ -36,9 +45,9 @@ public class SearchEngine {
         Searchable find = null;
         int count = 0, index;
         search = search.toLowerCase();
-        for (String string : searchables.keySet()) {
+        for (Searchable searchable : searchables) {
             int inCount = 0;
-            String str1 = searchables.get(string).getSearchName().toLowerCase();
+            String str1 = searchable.getSearchName().toLowerCase();
             int subIndex = str1.indexOf(search);
             while (subIndex != -1) {
                 inCount++;
@@ -46,7 +55,7 @@ public class SearchEngine {
                 subIndex = str1.indexOf(search, index);
             }
             if (inCount > count) {
-                find = searchables.get(string);
+                find = searchable;
                 count = inCount;
             }
         }
