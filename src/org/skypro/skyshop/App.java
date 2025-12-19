@@ -14,15 +14,15 @@ public class App {
         ProductBasket basket = new ProductBasket();
 
         System.out.println("\nСоздаем продукты");
-        SimpleProduct lemon = new SimpleProduct("Lemon", 30);
-        SimpleProduct apple = new SimpleProduct("Apple", 50);
-        SimpleProduct watermellon = new SimpleProduct("Watermellon", 95);
-        DiscountedProduct appleDis = new DiscountedProduct("Apple", 50, 10);
-        DiscountedProduct lemonDis = new DiscountedProduct("Lemon", 30, 30);
-        DiscountedProduct watermellonDis = new DiscountedProduct("Watermellon", 90, 20);
-        DiscountedProduct corn = new DiscountedProduct("Corn", 25, 10);
-        FixPriceProduct appleFix = new FixPriceProduct("Apple");
-        FixPriceProduct tomato = new FixPriceProduct("Tomato");
+        Product lemon = new SimpleProduct("Lemon", 30);
+        Product apple = new SimpleProduct("Apple", 50);
+        Product watermellon = new SimpleProduct("Watermellon", 95);
+        Product appleDis = new DiscountedProduct("Apple", 50, 10);
+        Product lemonDis = new DiscountedProduct("Lemon", 30, 30);
+        Product watermellonDis = new DiscountedProduct("Watermellon", 90, 20);
+        Product corn = new DiscountedProduct("Corn", 25, 10);
+        Product appleFix = new FixPriceProduct("Apple");
+        Product tomato = new FixPriceProduct("Tomato");
 
         System.out.println("\nПокупатель добавляет продукты в корзину (в хаотичном порядке)");
         basket.addProduct(lemon);
@@ -37,7 +37,7 @@ public class App {
         basket.addProduct(tomato);
 
         System.out.println("\nДобавление продукта в заполненную корзину, в которой нет свободного места (было актуально, когда корзина была массивом - до задачи 5)");
-        SimpleProduct whiskey = new SimpleProduct("Whiskey", 1000);
+        Product whiskey = new SimpleProduct("Whiskey", 1000);
         basket.addProduct(whiskey);
 
         System.out.println("\nПечать содержимого корзины с несколькими товарами");
@@ -108,17 +108,17 @@ public class App {
 
         System.out.println("\nСоздаем продукты с ошибками");
         try {
-            SimpleProduct lime = new SimpleProduct("Lime", -30);
+            Product lime = new SimpleProduct("Lime", -30);
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
         try {
-            DiscountedProduct greupfruit = new DiscountedProduct("Greupfruit", 40, 120);
+            Product greupfruit = new DiscountedProduct("Greupfruit", 40, 120);
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
         try {
-            FixPriceProduct strawberry = new FixPriceProduct("     ");
+            Product strawberry = new FixPriceProduct("     ");
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
@@ -178,7 +178,6 @@ public class App {
 
         System.out.println("______________________________________________________________________");
 
-
-
+        System.out.println("\nЗадача 8. Замена циклов FOR на Stream API. Лямбда-выражения");
     }
 }

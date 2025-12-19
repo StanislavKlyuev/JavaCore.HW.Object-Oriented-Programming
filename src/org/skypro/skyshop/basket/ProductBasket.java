@@ -2,10 +2,7 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductBasket {
 
@@ -23,43 +20,33 @@ public class ProductBasket {
     }
 
     public int getTotalPrice() {
-        int total = 0;
-        for (List<Product> list : productBasket.values()) {
-            for (Product product : list) {
-                total += product.getPrice();
-            }
-        }
-        return total;
+        return productBasket.values().stream()
+                .flatMap(Collection::stream)
+                .mapToInt(p -> p.getPrice())
+                .sum();
     }
 
     public int getSpecialProductSum() {
-        int sum = 0;
-        for (List<Product> list : productBasket.values()) {
-            for (Product product : list) {
-                if (product != null && product.isSpecial()) {
-                    sum++;
-                }
-            }
-        }
-        return sum;
+        return (int) productBasket.values().stream()
+                .flatMap(Collection::stream)
+                .filter(product -> product.isSpecial())
+                .count();
+    }
+
+    public int getTotalProduct() {
+        return (int) productBasket.values().stream()
+                .flatMap(Collection::stream)
+                .count();
     }
 
     public void printTotalProduct() {
-        boolean isEmpty = true;
-        int count = 0;
-        for (List<Product> list : productBasket.values()) {
-            if (list.size() != 0) {
-                for (Product product : list) {
-                    System.out.println(product);
-                    isEmpty = false;
-                    count++;
-                }
-            }
-        }
-        if (isEmpty) {
+        productBasket.values().stream()
+                .flatMap(Collection::stream)
+                .forEach(System.out::println);
+        if (getTotalPrice() == 0) {
             System.out.println("в корзине пусто");
         } else {
-            System.out.println("Всего товаров: " + count);
+            System.out.println("Всего товаров: " + getTotalProduct());
             System.out.println("Общая стоимость корзины: " + getTotalPrice());
             System.out.println("Специальных товаров: " + getSpecialProductSum());
         }
